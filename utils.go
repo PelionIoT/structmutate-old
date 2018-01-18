@@ -3,16 +3,17 @@ package structmutate
 import (
     "reflect"
     "errors"
-    "github.com/WigWagCo/maestro/log"
+    "fmt"
 )
 
 
 type logOut func (format string, a ...interface{})
 
-// var errOut = func (format string, a ...interface{}) {
+var errOut = func (format string, a ...interface{}) {
+    s := fmt.Sprintf(format, a...)
+    fmt.Printf("[error-structmutate]  %s\n", s)
+}
 
-// }
-var errOut = log.MaestroWarnf
 var dbgOut = func (format string, a ...interface{}) {
 
 }
