@@ -10,6 +10,7 @@ Golang utilities to manipulate structs
 ```
 import (
     "github.com/WigWagCo/structmutate"
+    "fmt"
 )
 
 var debugout = func (format string, a ...interface{}) {
