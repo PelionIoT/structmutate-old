@@ -3,7 +3,9 @@ Golang utilities to manipulate structs
 
 `func MergeInStruct(a interface{},b interface{}) (error)`
 
-`a` and `b` must be pointers to structs. This will merge all exported fields of `b` into `a` if and only if `b`'s field have non zero-value values.
+`a` and `b` must be pointers to structs. This will merge all exported fields of `b` into `a` if and only if their:
+- field names match
+- if `b`'s field have non zero-value values
 
 ```
 import (
