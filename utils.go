@@ -77,15 +77,21 @@ func MergeInStruct(a interface{}, b interface{}) (err error) {
                 errOut("MergeInStruct(): Field <%s> of struct can not be set, skipping.\n",fieldname)
                 continue
             }
+
+            if fieldvalb.Kind() == reflect.Bool {
+                fieldvala.SetBool(fieldvalb.Bool())
+                dbgOut("copied field <%s> (bool)\n",fieldname)                    
+                continue
+            }
             if fieldvalb.IsValid() {
-                if fieldvalb.Type().Kind() == fieldvala.Type().Kind() {
-                    fieldvala.Set(fieldvalb)
-                    dbgOut("copied field <%s>\n",fieldname)                    
-                } else {
-                    dbgOut("fields <%s> not of same Kind",fieldname)
-                }
+                    if fieldvalb.Type().Kind() == fieldvala.Type().Kind() {
+                        fieldvala.Set(fieldvalb)
+                        dbgOut("copied field <%s>\n",fieldname)                    
+                    } else {
+                        dbgOut("skipping field <%s> - is zero/not valid\n",fieldname)
+                    }                        
             } else {
-                dbgOut("skipping field <%s> - is zero/not valid\n",fieldname)
+                dbgOut("fields <%s> not of same Kind",fieldname)
             }
 
         } else {
